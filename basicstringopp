@@ -1,0 +1,76 @@
+#include <iostream>
+#include <string>
+#include <stdexcept>
+
+// Using the entire std namespace
+using namespace std;
+
+int main() {
+    // 1. Initialization and Declaration
+    string s1 = "Hello, ";
+    string s2 = "World!";
+    string s3 = "   Trim Me   \n";
+    string s4 = "C++ Programming";
+
+    // --- LENGTH AND ACCESS ---
+    cout << "--- LENGTH AND ACCESS ---\n";
+    
+    // .length() / .size() - Returns the number of characters
+    cout << "Length of s1: " << s1.length() << endl; 
+    
+    // [] Operator - Access character by index (0-based)
+    cout << "Character at index 0 in s1: " << s1[0] << endl; 
+    
+    // .at() - Safer access, throws exception on failure
+    try {
+        cout << "Character at index 6 in s1: " << s1.at(6) << endl;
+    } catch (const out_of_range& e) {
+        cerr << "Error accessing character: " << e.what() << endl;
+    }
+
+    // --- MANIPULATION ---
+    cout << "\n--- MANIPULATION ---\n";
+
+    // + operator and .append() - Concatenation
+    string combined = s1 + s2;
+    cout << "Combined string (s1 + s2): " << combined << endl; 
+    
+    // .append() is another way to join strings
+    combined.append(" End.");
+    cout << "After append(): " << combined << endl;
+
+    // .substr(pos, len) - Get a substring
+    cout << "Substring of s4 (index 4, length 11): " << s4.substr(4, 11) << endl; // "Programming"
+
+    // .replace(pos, len, str) - Replace part of the string
+    string r_demo = "The sky is blue.";
+    r_demo.replace(12, 4, "red"); // Start at index 12, remove 4 chars ("blue"), insert "red"
+    cout << "After replace(): " << r_demo << endl;
+    
+    // .erase(pos, len) - Remove characters
+    string e_demo = "RemoveThisPart";
+    e_demo.erase(6, 4); // Remove "This"
+    cout << "After erase(): " << e_demo << endl; // "RemovePart"
+    
+    // --- SEARCHING AND COMPARISON ---
+    cout << "\n--- SEARCHING AND COMPARISON ---\n";
+
+    // .find(str) - Find the first occurrence of a substring
+    size_t pos = s4.find("Prog");
+    if (pos != string::npos) {
+        cout << "\"Prog\" found in s4 at index: " << pos << endl;
+    } else {
+        cout << "\"Prog\" not found in s4." << endl;
+    }
+
+    // == operator - Equality check
+    string a = "test";
+    string b = "Test";
+    if (a == b) {
+        cout << "Strings 'a' and 'b' are equal." << endl;
+    } else {
+        cout << "Strings 'a' and 'b' are NOT equal (case-sensitive)." << endl;
+    }
+
+    return 0;
+}
